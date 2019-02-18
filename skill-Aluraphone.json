@@ -1,0 +1,792 @@
+{
+  "name": "Aluraphone",
+  "intents": [
+    {
+      "intent": "entrega-de-produto",
+      "examples": [
+        {
+          "text": "O produto ainda não chegou, o que devo fazer?"
+        },
+        {
+          "text": "Quando o produto que eu pedi vai ser entregue?"
+        },
+        {
+          "text": "Qual e o prazo de entrega?"
+        },
+        {
+          "text": "Quanto tempo leva para chegar?"
+        },
+        {
+          "text": "Demora quantos dias?"
+        },
+        {
+          "text": "meu produto ainda não chegou, o que faço?"
+        },
+        {
+          "text": "meu item ainda não chegou, o que faço?"
+        }
+      ],
+      "description": "Quanto tempo demora para o meu produto ser entregue?"
+    },
+    {
+      "intent": "Saldações-3",
+      "examples": [
+        {
+          "text": "suave"
+        },
+        {
+          "text": "tudo ok?"
+        },
+        {
+          "text": "tudo bem?"
+        },
+        {
+          "text": "como vai?"
+        },
+        {
+          "text": "ola!"
+        },
+        {
+          "text": "oi."
+        }
+      ],
+      "description": "Oi"
+    },
+    {
+      "intent": "comprar-produto",
+      "examples": [
+        {
+          "text": "Me ajude a comprar um tablet"
+        },
+        {
+          "text": "Eu queria comprar um celular"
+        },
+        {
+          "text": "Tem como me ajudar a comprar um smartwatch?"
+        }
+      ],
+      "description": "Você pode me ajudar a comprar um celular?"
+    },
+    {
+      "intent": "Saldações-2",
+      "examples": [
+        {
+          "text": "Boa tarde."
+        }
+      ],
+      "description": "Boa tarde."
+    },
+    {
+      "intent": "adicionar-produto",
+      "examples": [
+        {
+          "text": "Botei o produto carrinho, ficou reservado?"
+        },
+        {
+          "text": "Quando o item esta no carrinho, ele já esta reservado pra mim?"
+        },
+        {
+          "text": "Se o produto estiver no carrinho, ele esta reservado?"
+        },
+        {
+          "text": "No carrinho, o produto fica reservado?"
+        },
+        {
+          "text": "Ao adicionar um produto ao carrinho, ele fica reservado?"
+        },
+        {
+          "text": "Quero saber, se quando eu boto o produto no carrinho ele fica reservador?"
+        }
+      ],
+      "description": "Quando eu adiciono um produto ao carrinho, ele fica reservado?"
+    },
+    {
+      "intent": "Agradecimento",
+      "examples": [
+        {
+          "text": "valeu"
+        },
+        {
+          "text": "obrigada"
+        }
+      ],
+      "description": "obrigado"
+    },
+    {
+      "intent": "saudações",
+      "examples": [
+        {
+          "text": "bom dia."
+        }
+      ],
+      "description": "Bom dia."
+    }
+  ],
+  "entities": [
+    {
+      "entity": "cidade",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "São paulo",
+          "synonyms": [
+            "Sp",
+            "sampa"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Rio de Janeiro",
+          "synonyms": [
+            "Rj",
+            "rio"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Salvador",
+          "synonyms": [
+            "ssa"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "Marca",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "apple",
+          "synonyms": [
+            "ios",
+            "iphone"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "LG",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "assus",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "sony",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "alcatel",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "samsung",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "motorola",
+          "synonyms": []
+        },
+        {
+          "type": "synonyms",
+          "value": "lenovo",
+          "synonyms": []
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-currency",
+      "values": []
+    },
+    {
+      "entity": "sim-não",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "nao",
+          "synonyms": [
+            "not",
+            "nunca",
+            "never"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "ok",
+          "synonyms": [
+            "sim",
+            "beleza",
+            "blz",
+            "fechou"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "language": "pt-br",
+  "metadata": {
+    "api_version": {
+      "major_version": "v1",
+      "minor_version": "2018-09-20"
+    }
+  },
+  "description": "",
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Limite de dinheiro",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Eu tenho um celular @Marca de ate @sys-currency. posso botar no carrinho?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_3_1550431325158",
+      "metadata": {},
+      "conditions": "@sys-currency || @sim-não || @Marca",
+      "dialog_node": "node_4_1550431616504"
+    },
+    {
+      "type": "standard",
+      "title": "Salvador",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Em ate 20 dias uteis o produto deve ser entregue!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1550424805833",
+      "metadata": {},
+      "conditions": "@cidade:Salvador || @cidade:(Rio de Janeiro)",
+      "dialog_node": "node_7_1550427905741",
+      "previous_sibling": "node_6_1550427801612"
+    },
+    {
+      "type": "standard",
+      "title": "São paulo",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Em ate 15 dias úteis o produto deve chegar!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1550424805833",
+      "metadata": {},
+      "conditions": "@cidade:(São paulo)",
+      "dialog_node": "node_6_1550427801612"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": "tem algum valor maximo para gastar ? quanto?"
+      },
+      "parent": "slot_19_1550438487828",
+      "metadata": {},
+      "event_name": "focus",
+      "dialog_node": "handler_21_1550438487828",
+      "previous_sibling": "handler_20_1550438487828"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_19_1550438487828",
+      "context": {
+        "moeda": "@sys-currency"
+      },
+      "metadata": {},
+      "conditions": "@sys-currency",
+      "event_name": "input",
+      "dialog_node": "handler_20_1550438487828"
+    },
+    {
+      "type": "standard",
+      "title": "Preferencia de marca",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "tem algum valor maximo para gastar ? quanto?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1550430933716",
+      "metadata": {},
+      "conditions": "@Marca || @sim-não",
+      "dialog_node": "node_3_1550431325158"
+    },
+    {
+      "type": "standard",
+      "title": "ok",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Você tem preferência por marca?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1550430709566",
+      "metadata": {},
+      "conditions": "@sim-não:ok",
+      "dialog_node": "node_2_1550430933716"
+    },
+    {
+      "type": "standard",
+      "title": "Adicionar produto ao carrinho",
+      "output": {},
+      "parent": "node_4_1550431616504",
+      "metadata": {
+        "fallback": "leave",
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "@sim-não",
+      "dialog_node": "node_5_1550436147276",
+      "digress_out": "allow_all"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_12_1550438158145",
+      "metadata": {},
+      "variable": "$sn2",
+      "dialog_node": "slot_22_1550438541353",
+      "previous_sibling": "slot_19_1550438487828"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Posso te ajudar em mais alguma coisa?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_12_1550438158145",
+      "metadata": {},
+      "conditions": "@sim-não:nao",
+      "dialog_node": "node_8_1550487596058",
+      "previous_sibling": "node_7_1550487566528"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_12_1550438158145",
+      "metadata": {},
+      "variable": "$moeda",
+      "dialog_node": "slot_19_1550438487828",
+      "previous_sibling": "slot_16_1550438449648"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_12_1550438158145",
+      "metadata": {},
+      "variable": "$Marca",
+      "dialog_node": "slot_16_1550438449648",
+      "previous_sibling": "slot_13_1550438198311"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_12_1550438158145",
+      "metadata": {},
+      "variable": "$sn",
+      "dialog_node": "slot_13_1550438198311",
+      "previous_sibling": "node_8_1550487596058"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "O produto foi adicionado ao seu carrinho"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "multiline"
+          },
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_12_1550438158145",
+      "metadata": {},
+      "conditions": "@sim-não:ok",
+      "dialog_node": "node_7_1550487566528"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": "Você tem preferência por marca?"
+      },
+      "parent": "slot_16_1550438449648",
+      "metadata": {},
+      "event_name": "focus",
+      "dialog_node": "handler_18_1550438449648",
+      "previous_sibling": "handler_17_1550438449648"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_16_1550438449648",
+      "context": {
+        "Marca": "@Marca"
+      },
+      "conditions": "@Marca",
+      "event_name": "input",
+      "dialog_node": "handler_17_1550438449648"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_5_1550436147276",
+      "metadata": {},
+      "variable": "$sim-não",
+      "dialog_node": "slot_9_1550437675611",
+      "previous_sibling": "node_8_1550437524847"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Tudo bem. continue comprando!"
+              }
+            ],
+            "response_type": "text"
+          }
+        ]
+      },
+      "parent": "node_5_1550436147276",
+      "metadata": {},
+      "conditions": "@sim-não:nao",
+      "dialog_node": "node_8_1550437524847",
+      "previous_sibling": "node_7_1550437481817"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "O produto foi adicionado ao seu carrinho"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1550436147276",
+      "metadata": {},
+      "conditions": "@sim-não:ok",
+      "dialog_node": "node_7_1550437481817"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": "ok legal. vamos la?"
+      },
+      "parent": "slot_13_1550438198311",
+      "metadata": {},
+      "event_name": "focus",
+      "dialog_node": "handler_15_1550438198311",
+      "previous_sibling": "handler_14_1550438198311"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_13_1550438198311",
+      "context": {
+        "sn": "@sim-não"
+      },
+      "conditions": "@sim-não",
+      "event_name": "input",
+      "dialog_node": "handler_14_1550438198311"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_22_1550438541353",
+      "context": {
+        "sn2": "@sim-não"
+      },
+      "metadata": {},
+      "conditions": "@sim-não",
+      "event_name": "input",
+      "dialog_node": "handler_23_1550438541354",
+      "previous_sibling": "handler_24_1550438541354"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": "Eu tenho um celular $Marca de ate $moeda posso botar no carrinho?"
+      },
+      "parent": "slot_22_1550438541353",
+      "metadata": {},
+      "event_name": "focus",
+      "dialog_node": "handler_24_1550438541354"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_9_1550437675611",
+      "event_name": "focus",
+      "dialog_node": "handler_11_1550437675611",
+      "previous_sibling": "handler_10_1550437675611"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_9_1550437675611",
+      "context": {
+        "sim-não": "@sim-não"
+      },
+      "conditions": "@sim-não",
+      "event_name": "input",
+      "dialog_node": "handler_10_1550437675611"
+    },
+    {
+      "type": "standard",
+      "title": "Reserva de produto",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Não.  o produto só e reservado apos a compra."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "#adicionar-produto",
+      "dialog_node": "node_1_1550423937783",
+      "previous_sibling": "Bem-vindo"
+    },
+    {
+      "type": "standard",
+      "title": "Entrega de produto",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Qual a sua cidade?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "#entrega-de-produto",
+      "dialog_node": "node_2_1550424805833",
+      "previous_sibling": "node_9_1550428938650"
+    },
+    {
+      "type": "frame",
+      "title": "Compra de produto com espaços",
+      "output": {},
+      "metadata": {
+        "fallback": "leave",
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "#comprar-produto",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_12_1550438158145",
+      "digress_out": "allow_all",
+      "previous_sibling": "node_2_1550424805833",
+      "digress_out_slots": "not_allowed"
+    },
+    {
+      "type": "standard",
+      "title": "Em outros casos",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Eu não entendi. Você pode tentar reformular a frase."
+              },
+              {
+                "text": "Você pode reformular sua afirmação? Eu não estou entendendo."
+              },
+              {
+                "text": "Eu não entendi o sentido."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "anything_else",
+      "dialog_node": "Em outros casos",
+      "previous_sibling": "node_6_1550436595113"
+    },
+    {
+      "type": "standard",
+      "title": "Prazo de entrega de produto com cidade",
+      "output": {
+        "generic": [
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "condition",
+        "dialog_node": "node_6_1550427801612"
+      },
+      "conditions": "#entrega-de-produto && @cidade",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_9_1550428938650",
+      "previous_sibling": "node_1_1550423937783"
+    },
+    {
+      "type": "standard",
+      "title": "Agradecimento",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Posso ajudar com mais alguma coisa?"
+              },
+              {
+                "text": "de nada!"
+              },
+              {
+                "text": "imgaine!"
+              },
+              {
+                "text": "valeu!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "#Agradecimento",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_6_1550436595113",
+      "previous_sibling": "node_1_1550430709566"
+    },
+    {
+      "type": "standard",
+      "title": "compra de produto",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "ok. vamos la?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "#comprar-produto",
+      "dialog_node": "node_1_1550430709566",
+      "previous_sibling": "node_12_1550438158145"
+    },
+    {
+      "type": "standard",
+      "title": "Bem-vindo",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Olá. Como posso te ajudar?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "metadata": {},
+      "conditions": "welcome",
+      "dialog_node": "Bem-vindo"
+    }
+  ],
+  "workspace_id": "a5d78e2a-d4c7-4fad-a46f-bf37a3a515a1",
+  "counterexamples": [],
+  "system_settings": {
+    "tooling": {
+      "store_generic_responses": true
+    }
+  },
+  "learning_opt_out": false,
+  "status": "Available"
+}
